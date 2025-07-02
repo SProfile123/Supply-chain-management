@@ -1,0 +1,11 @@
+Item_ID,Category,MOQ,Unit_Cost,Duties_%,Supplier
+ITEM001,Plastic,70,88.35,5.48,Alpha Ltd
+ITEM002,Mechanical,69,31.49,1.95,Alpha Ltd
+ITEM003,Plastic,176,50.61,6.91,Alpha Ltd
+ITEM004,Packaging,117,98.65,8.4,Gamma Inc
+ITEM005,Plastic,159,79.48,4.42,Alpha Ltd
+ITEM006,Plastic,165,12.45,7.98,Gamma Inc
+ITEM007,Electronics,192,15.87,9.68,Gamma Inc
+ITEM008,Packaging,169,51.75,2.83,Beta Corp
+ITEM009,Packaging,128,91.83,5.71,Beta Corp
+ITEM010,Plastic,165,58.48,3.58,Beta Corp
