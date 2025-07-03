@@ -1,20 +1,28 @@
 import pandas as pd
-from statsmodels.tsa.arima.model import ARIMA
+from prophet import Prophet
 import matplotlib.pyplot as plt
 
 # Load data
 df = pd.read_csv('../data/daily_product_demand.csv')
 df['Date'] = pd.to_datetime(df['Date'])
 
-# Forecast for a single product (example)
-product_df = df[df['Product ID'] == 'P1001'].groupby('Date')['Units Sold'].sum()
-model = ARIMA(product_df, order=(5,1,0))
-model_fit = model.fit()
-forecast = model_fit.forecast(steps=30)
+# Prepare data for Prophet
+product_df = df[df['Product ID'] == 'P1001']
+daily_demand = product_df.groupby('Date')['Units Sold'].sum().reset_index()
+daily_demand.columns = ['ds', 'y']  # Prophet requires these column names
 
-# Plot
-plt.plot(product_df[-60:], label='Historical')
-plt.plot(forecast, label='Forecast', linestyle='--')
-plt.legend()
-plt.title('30-Day Forecast for Product P1001')
+# Build and fit the model
+model = Prophet()
+model.fit(daily_demand)
+
+# Create future dataframe
+future = model.make_future_dataframe(periods=30)
+forecast = model.predict(future)
+
+# Plot forecast
+model.plot(forecast)
+plt.title('Prophet Forecast – Product P1001')
+plt.xlabel('Date')
+plt.ylabel('Units Sold')
 plt.show()
+
